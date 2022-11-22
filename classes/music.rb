@@ -5,7 +5,7 @@ class MusicAlbum < Item
   attr_accessor :on_spotify
 
   def initialize(genre, publish_date, archived, id: rand(1...1000), on_spotify: false)
-    super(genre, publish_date, archived, id:)
+    super(genre, publish_date, archived, id: id)
     @on_spotify = on_spotify
   end
 
@@ -40,7 +40,7 @@ class MusicAlbum < Item
     archived = gets.chomp.upcase == 'Y'
     print 'Album on Spotify? (Y/N): '
     on_spotify = gets.chomp.upcase == 'Y'
-    new(genre, publish_date, archived, on_spotify:)
+    new(genre, publish_date, archived, on_spotify: on_spotify)
   end
 
   def self.save_music_album(albums)
