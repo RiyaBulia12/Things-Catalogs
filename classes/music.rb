@@ -18,7 +18,6 @@ class MusicAlbum < Item
 
     rows = []
     albums.each do |album|
-      p album.id
       rows << [album.id, album.genre, album.publish_date, album.on_spotify, album.archived]
     end
 
@@ -55,13 +54,13 @@ class MusicAlbum < Item
         on_spotify: album.on_spotify
       }
     end
-    File.write('./albums.json', JSON.pretty_generate(albums_data))
+    File.write('json/albums.json', JSON.pretty_generate(albums_data))
   end
 
   def self.retrieve_music_albums
-    return [] unless File.exist?('./albums.json')
+    return [] unless File.exist?('json/albums.json')
 
-    albums_data = JSON.parse(File.read('./albums.json'))
+    albums_data = JSON.parse(File.read('json/albums.json'))
     albums = []
     albums_data.each do |album|
       albums << new(album['genre'], album['publish_date'], album['archived'], on_spotify: album['on_spotify'])
