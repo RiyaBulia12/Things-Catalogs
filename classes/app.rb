@@ -1,6 +1,6 @@
 require_relative './music'
 require_relative './genre'
-
+require 'terminal-table'
 require 'json'
 
 class App
@@ -28,13 +28,12 @@ class App
       album = MusicAlbum.add_music_album
       @albums << album
       puts "\n-----------------------------\n  Album Added Succesfully \n-----------------------------"
+      save_data
     when 5
       Movie.add_movie(@movies)
     else
-      return 'Invalid option'
+      'Invalid option'
     end
-
-    save_data
   end
 
   def save_data
