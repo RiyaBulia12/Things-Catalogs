@@ -6,11 +6,12 @@ def main
   puts '---------------------------------------'
   puts 'Select from the Menu'
 
-  app = App.new()
+  app = App.new
   loop do
     menu
     choice = gets.to_i
-    return if choice == 6
+    return puts "---------------------\n  Exiting from app \n---------------------" if choice == 6
+
     app.user_choice(choice)
   end
 end
@@ -26,6 +27,5 @@ def menu
     '6. Exit'
   ]
 end
-
 
 main

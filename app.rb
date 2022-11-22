@@ -1,26 +1,29 @@
 class App
-  p 'App called'
+  attr_accessor :movies, :albums, :genres, :sources
+  def initialize
+    @movies = []
+    @albums = []
+    @genres = []
+    @sources = []
+  end
 
   def user_choice(choice)
     option = main_menu[choice]
-    case option 
+    case option
     when 0
-      app.list_all_music_albums
+      MusicAlbum.list_all_music_albums(@albums)
     when 1
-      app.list_all_movies
+      Movies.list_all_movies(@movies)
     when 2
-      app.list_all_genres
+      Genre.list_all_genres(@genres)
     when 3
-      app.list_all_sources
+      Source.list_all_sources(@sources)
     when 4
-      app.add_music_album
+      MusicAlbum.add_music_album(@albums)
     when 5
-      app.add_movie
-    when 6
-      exit
+      Movie.add_movie(@movies)
     else
       puts 'Invalid option'
     end
   end
-
 end
