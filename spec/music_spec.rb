@@ -1,5 +1,4 @@
 require_relative '../classes/music'
-require 'terminal-table'
 
 describe MusicAlbum do
   before(:each) do
