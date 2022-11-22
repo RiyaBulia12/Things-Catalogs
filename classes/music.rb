@@ -29,7 +29,7 @@ class MusicAlbum < Item
     puts table
   end
 
-  def self.add_music_album(_albums)
+  def self.add_music_album
     puts 'Enter the following details to Add albums'
 
     print 'Genre: '

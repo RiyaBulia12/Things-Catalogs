@@ -25,7 +25,7 @@ class App
     when 3
       Source.list_all_sources(@sources)
     when 4
-      album = MusicAlbum.add_music_album(@albums)
+      album = MusicAlbum.add_music_album
       @albums << album
       puts "\n-----------------------------\n  Album Added Succesfully \n-----------------------------"
     when 5
