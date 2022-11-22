@@ -1,3 +1,7 @@
+require_relative './music.rb'
+require_relative './genre.rb'
+
+
 class App
   attr_accessor :movies, :albums, :genres, :sources
 
@@ -9,8 +13,7 @@ class App
   end
 
   def user_choice(choice)
-    option = main_menu[choice]
-    case option
+    case choice
     when 0
       MusicAlbum.list_all_music_albums(@albums)
     when 1
@@ -20,7 +23,9 @@ class App
     when 3
       Source.list_all_sources(@sources)
     when 4
-      MusicAlbum.add_music_album(@albums)
+      album = MusicAlbum.add_music_album(@albums)
+      @albums << album
+      puts "\n-----------------------------\n  Album Added Succesfully \n-----------------------------"
     when 5
       Movie.add_movie(@movies)
     else
