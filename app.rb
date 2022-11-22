@@ -1,5 +1,6 @@
 class App
   attr_accessor :movies, :albums, :genres, :sources
+
   def initialize
     @movies = []
     @albums = []
