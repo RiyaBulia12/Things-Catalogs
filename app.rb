@@ -1,6 +1,7 @@
-require_relative './music.rb'
-require_relative './genre.rb'
+require_relative './music'
+require_relative './genre'
 
+require 'json'
 
 class App
   attr_accessor :movies, :albums, :genres, :sources
@@ -15,6 +16,7 @@ class App
   def user_choice(choice)
     case choice
     when 0
+      @albums = MusicAlbum.retrieve_music_albums
       MusicAlbum.list_all_music_albums(@albums)
     when 1
       Movies.list_all_movies(@movies)
@@ -29,7 +31,13 @@ class App
     when 5
       Movie.add_movie(@movies)
     else
-      puts 'Invalid option'
+      return 'Invalid option'
     end
+
+    save_data
+  end
+
+  def save_data
+    MusicAlbum.save_music_album(@albums) if @albums.empty? == false
   end
 end
