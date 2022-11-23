@@ -11,12 +11,11 @@ class Genre
 
   def add_item(item)
     @items << item
-    item.genre = self
+    item&.genre = self
   end
 
   def self.list_all_genres
-    genres = JSON.parse(File.read('json/genres.json')) if File.exist?('json/genres.json')
-
+    genres = parse_data
     return create_genre_choice if genres.nil? || genres.empty?
 
     row = []
@@ -25,6 +24,10 @@ class Genre
     end
     create_table(row)
     row
+  end
+
+  def self.parse_data
+   JSON.parse(File.read('json/genres.json')) if File.exist?('json/genres.json')
   end
 
   def self.create_table(row)
@@ -74,7 +77,7 @@ class Genre
   end
 
   def self.save_genre(genres)
-    genres_data = JSON.parse(File.read('json/genres.json')) if File.exist?('json/genres.json')
+    genres_data = parse_data
 
     genres.each do |genre|
       genres_data << {
