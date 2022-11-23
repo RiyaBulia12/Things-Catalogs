@@ -1,6 +1,5 @@
 require_relative '../classes/genre'
 require 'json'
-require 'terminal-table'
 
 describe Genre do
   before(:each) do
@@ -24,10 +23,9 @@ describe Genre do
     end
 
     it 'should be able to add an item' do
-      @item = Item.new('Hiphop','2022', true)
+      @item = Item.new('Hiphop', '2022', true)
       @genre_obj.add_item(@item)
       expect(@genre_obj.items).to include(@item)
     end
-
   end
 end

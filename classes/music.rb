@@ -37,7 +37,7 @@ class MusicAlbum < Item
     archived = gets.chomp.upcase == 'Y'
     print 'Album on Spotify? (Y/N): '
     on_spotify = gets.chomp.upcase == 'Y'
-    new(genre, publish_date, archived, on_spotify:)
+    new(genre, publish_date, archived, on_spotify: on_spotify)
   end
 
   def self.save_music_album(albums)

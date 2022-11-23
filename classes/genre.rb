@@ -27,7 +27,7 @@ class Genre
   end
 
   def self.parse_data
-   JSON.parse(File.read('json/genres.json')) if File.exist?('json/genres.json')
+    JSON.parse(File.read('json/genres.json')) if File.exist?('json/genres.json')
   end
 
   def self.create_table(row)
