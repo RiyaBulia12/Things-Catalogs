@@ -17,10 +17,6 @@ describe Genre do
       expect(@genre_obj.items).to be_an_instance_of(Array)
     end
 
-    it 'should return array of genres' do
-      list = Genre.list_all_genres
-      expect(list).to be_an_instance_of(Array)
-    end
 
     it 'should be able to add an item' do
       @item = Item.new('Hiphop', '2022', true)
