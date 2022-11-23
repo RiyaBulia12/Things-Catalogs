@@ -21,7 +21,7 @@ class App
     when 1
       Movies.list_all_movies(@movies)
     when 2
-      Genre.list_all_genres
+      retrieve_genre_list
     when 3
       Source.list_all_sources(@sources)
     when 4
@@ -33,10 +33,18 @@ class App
     end
   end
 
+  def retrieve_genre_list
+    @genres = Genre.list_all_genres
+    Genre.create_genre_choice if @genres.empty?
+  end
+
   def create_new_music_data
     @albums = MusicAlbum.retrieve_music_albums
-    album = MusicAlbum.add_music_album
-    @albums << album
+    retrieve_genre_list
+    genre_name = Genre.enter_genre_details(@genres) if @genres.empty? == false
+
+    @albums << MusicAlbum.add_music_album(genre_name)
+
     puts "\n-----------------------------\n  Album Added Succesfully \n-----------------------------"
     MusicAlbum.save_music_album(@albums) if @albums.empty? == false
   end
