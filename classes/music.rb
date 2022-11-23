@@ -1,10 +1,10 @@
 require_relative './item'
 
 class MusicAlbum < Item
-  attr_accessor :on_spotify
+  attr_accessor :on_spotify, :genre
 
-  def initialize(genre, publish_date, archived, id: rand(1...1000), on_spotify: false)
-    super(genre, publish_date, archived, id: id)
+  def initialize(*args, on_spotify: false)
+    super(*args)
     @on_spotify = on_spotify
   end
 
@@ -30,9 +30,7 @@ class MusicAlbum < Item
 
   def self.add_music_album
     puts 'Enter the following details to Add albums'
-
-    print 'Genre: '
-    genre = gets.chomp
+    genre = Genre.enter_genre_details
     print 'Published Date: '
     publish_date = gets.chomp
     print 'Album Archived? (Y/N): '
