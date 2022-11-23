@@ -1,10 +1,9 @@
-require_relative './app'
+require_relative './classes/app'
 
 def main
-  puts '---------------------------------------'
+  puts "\n---------------------------------------"
   puts '  Welcome to Catalog of My things App'
-  puts '---------------------------------------'
-  puts 'Select from the Menu'
+  puts "---------------------------------------\n"
 
   app = App.new
   loop do
@@ -17,6 +16,7 @@ def main
 end
 
 def menu
+  puts 'Select Option from the Menu'
   puts [
     '0. List all music albums',
     '1. List all movies',

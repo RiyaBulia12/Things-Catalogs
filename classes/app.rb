@@ -1,3 +1,8 @@
+require_relative './music'
+require_relative './genre'
+require 'terminal-table'
+require 'json'
+
 class App
   attr_accessor :movies, :albums, :genres, :sources
 
@@ -9,9 +14,9 @@ class App
   end
 
   def user_choice(choice)
-    option = main_menu[choice]
-    case option
+    case choice
     when 0
+      @albums = MusicAlbum.retrieve_music_albums
       MusicAlbum.list_all_music_albums(@albums)
     when 1
       Movies.list_all_movies(@movies)
@@ -20,11 +25,18 @@ class App
     when 3
       Source.list_all_sources(@sources)
     when 4
-      MusicAlbum.add_music_album(@albums)
+      album = MusicAlbum.add_music_album
+      @albums << album
+      puts "\n-----------------------------\n  Album Added Succesfully \n-----------------------------"
+      save_data
     when 5
       Movie.add_movie(@movies)
     else
-      puts 'Invalid option'
+      'Invalid option'
     end
+  end
+
+  def save_data
+    MusicAlbum.save_music_album(@albums) if @albums.empty? == false
   end
 end
