@@ -1,19 +1,19 @@
-require_relative '../classes/genre'
+require_relative '../classes/source'
 require 'json'
 
-describe Genre do
+describe Source do
   before(:each) do
-    @source_obj = Genre.new('Hiphop')
+    @source_obj = Source.new('ott')
   end
 
-  context 'When testing the Genre class constructor' do
-    it 'should return Genre instance' do
-      expect(@source_obj).to be_an_instance_of(Genre)
+  context 'When testing the Source class constructor' do
+    it 'should return Source instance' do
+      expect(@source_obj).to be_an_instance_of(Source)
     end
 
     it 'should return correct data with correct data types' do
       expect(@source_obj.id).to be_an_instance_of(Integer)
-      expect(@source_obj.name).to eq 'Hiphop'
+      expect(@source_obj.name).to eq 'ott'
       expect(@source_obj.items).to be_an_instance_of(Array)
     end
 
