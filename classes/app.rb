@@ -54,14 +54,16 @@ class App
 
   def retrieve_source_list
     @sources = Source.list_all_sources
-    Source.create_source_choice if @sources.empty?
+    if @sources.empty?
+      Source.create_source_choice
+    else
+      Source.enter_source_details(@sources)
+    end
   end
 
   def create_new_movies_data
     @movies = Movies.retrieve_movies
-    retrieve_source_list
-    source_name = Source.enter_source_details(@sources) if @sources.empty? == false
-
+    source_name = retrieve_source_list
     @movies << Movies.add_movie(source_name)
 
     puts "\n-----------------------------\n  Movies Added Succesfully \n-----------------------------"
