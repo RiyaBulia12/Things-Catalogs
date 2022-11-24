@@ -36,7 +36,7 @@ class Movies < Item
     archived = gets.chomp.upcase == 'Y'
     print 'Is it a silent movie? (Y/N) : '
     silent = gets.chomp.upcase == 'Y'
-    new(publish_date, archived, source, silent:)
+    new(publish_date, archived, source, silent: silent)
   end
 
   def self.save_movies(movies)
