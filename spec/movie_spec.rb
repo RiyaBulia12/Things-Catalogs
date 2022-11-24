@@ -2,24 +2,24 @@ require_relative '../classes/movie'
 
 describe Movies do
   before(:each) do
-    @movie_obj = Movies.new('2022', true, 'Thriller', on_spotify: true)
+    @music_obj = Movies.new('2022', true, 'Online', silent: true)
   end
 
   context 'When testing the Movies class constructor' do
     it 'should return Movies instance' do
-      expect(@movie_obj).to be_an_instance_of(Movies)
+      expect(@music_obj).to be_an_instance_of(Movies)
     end
 
     it 'should have Item as a superclass' do
-      expect(@movie_obj.class.superclass).to eq Item
+      expect(@music_obj.class.superclass).to eq Item
     end
 
     it 'should return correct data with correct data types' do
-      expect(@movie_obj.id).to be_an_instance_of(Integer)
-      expect(@movie_obj.genre).to eq 'Thriller'
-      expect(@movie_obj.publish_date).to eq '2022'
-      expect(@movie_obj.archived).to eq true
-      expect(@movie_obj.on_spotify).to eq true
+      expect(@music_obj.id).to be_an_instance_of(Integer)
+      expect(@music_obj.source).to eq 'Online'
+      expect(@music_obj.publish_date).to eq '2022'
+      expect(@music_obj.archived).to eq true
+      expect(@music_obj.silent).to eq true
     end
 
     it 'should return nil when albums is []' do
