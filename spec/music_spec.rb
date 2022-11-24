@@ -2,7 +2,7 @@ require_relative '../classes/music'
 
 describe MusicAlbum do
   before(:each) do
-    @music_obj = MusicAlbum.new('Thriller', '2022', true, on_spotify: true)
+    @music_obj = MusicAlbum.new('2022', true, 'Thriller', on_spotify: true)
   end
 
   context 'When testing the MusicAlbum class constructor' do

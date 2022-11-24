@@ -5,7 +5,6 @@ require_relative './source'
 require 'terminal-table'
 require 'json'
 
-
 class App
   attr_accessor :movies, :albums, :genres, :sources
 

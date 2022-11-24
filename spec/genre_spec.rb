@@ -18,7 +18,7 @@ describe Genre do
     end
 
     it 'should be able to add an item' do
-      @item = Item.new('Hiphop', '2022', true)
+      @item = Item.new(true, '2022')
       @genre_obj.add_item(@item)
       expect(@genre_obj.items).to include(@item)
     end

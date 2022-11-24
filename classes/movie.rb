@@ -3,9 +3,10 @@ require_relative './item'
 class Movies < Item
   attr_accessor :silent
 
-  def initialize(*args, silent:false)
+  def initialize(*args, source, silent: false)
     super(*args)
     @silent = silent
+    @source = source
   end
 
   def can_be_archived?
@@ -17,12 +18,12 @@ class Movies < Item
 
     rows = []
     movies.each do |movie|
-      rows << [movie.id, movie.source, movie.publish_date, movie.silent, movie.archived]
-  end
+      rows << [movie.id, movie.publish_date, movie.archived, movie.source, movie.silent]
+    end
 
     table = Terminal::Table.new
     table.title = 'List of Movies'
-    table.headings = ['Id', 'Source', 'Published On', 'silent?', 'movie Archived?']
+    table.headings = ['Id', 'Published On', 'movie Archived?', 'Source', 'Silent?']
     table.rows = rows
     puts table
   end
@@ -35,7 +36,7 @@ class Movies < Item
     archived = gets.chomp.upcase == 'Y'
     print 'Is it a silent movie? (Y/N) : '
     silent = gets.chomp.upcase == 'Y'
-    new(publish_date, archived, source: source, silent: silent)
+    new(publish_date, archived, source, silent:)
   end
 
   def self.save_movies(movies)
@@ -58,9 +59,8 @@ class Movies < Item
     movie_data = JSON.parse(File.read('json/movies.json'))
     movies = []
     movie_data.each do |movie|
-      movies << new(movie['source'], movie['publish_date'], movie['archived'], silent: movie['silent'])
+      movies << new(movie['publish_date'], movie['archived'], movie['source'], silent: movie['silent'])
     end
     movies
   end
-
 end
