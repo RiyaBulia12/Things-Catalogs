@@ -16,14 +16,16 @@ class Genre
 
   def self.list_all_genres
     genres = parse_data
-    return create_genre_choice if genres.nil? || genres.empty?
+    return [] if genres.nil? || genres.empty?
 
     row = []
+    genre_obj = []
     genres.each do |genre|
+      genre_obj << new(genre['name'])
       row << [genres.find_index(genre), genre['id'], genre['name']]
     end
     create_table(row)
-    row
+    genre_obj
   end
 
   def self.parse_data
@@ -49,8 +51,7 @@ class Genre
     create_new_genre
   end
 
-  def self.enter_genre_details
-    genre_list = list_all_genres
+  def self.enter_genre_details(genre_list)
     print "1. Select Genre \n2. Create New Genre: "
     genre_choice = gets.to_i
 
@@ -59,7 +60,7 @@ class Genre
     when 1
       print 'Select index from genre list: '
       genre_choice = gets.to_i
-      genre = genre_list[genre_choice][2]
+      genre = genre_list[genre_choice].name
     when 2
       genre = create_new_genre
     else 'Invalid Option'

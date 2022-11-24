@@ -28,9 +28,8 @@ class MusicAlbum < Item
     puts table
   end
 
-  def self.add_music_album
+  def self.add_music_album(genre)
     puts 'Enter the following details to Add albums'
-    genre = Genre.enter_genre_details
     print 'Published Date: '
     publish_date = gets.chomp
     print 'Album Archived? (Y/N): '
