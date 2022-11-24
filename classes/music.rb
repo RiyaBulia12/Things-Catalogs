@@ -1,11 +1,12 @@
 require_relative './item'
 
 class MusicAlbum < Item
-  attr_accessor :on_spotify, :genre
+  attr_accessor :on_spotify
 
-  def initialize(*args, on_spotify: false)
+  def initialize(*args, genre, on_spotify: false)
     super(*args)
     @on_spotify = on_spotify
+    @genre = genre
   end
 
   def can_be_archived?
@@ -17,12 +18,12 @@ class MusicAlbum < Item
 
     rows = []
     albums.each do |album|
-      rows << [album.id, album.genre, album.publish_date, album.on_spotify, album.archived]
+      rows << [album.id, album.publish_date, album.archived, album.genre, album.on_spotify]
     end
 
     table = Terminal::Table.new
     table.title = 'List of Music Albums'
-    table.headings = ['Id', 'Genre', 'Published On', 'Available on Spotify?', 'Album Archived?']
+    table.headings = ['Id', 'Published On', 'Album Archived?', 'Genre', 'Available on Spotify?']
     table.rows = rows
 
     puts table
@@ -36,7 +37,7 @@ class MusicAlbum < Item
     archived = gets.chomp.upcase == 'Y'
     print 'Album on Spotify? (Y/N): '
     on_spotify = gets.chomp.upcase == 'Y'
-    new(genre, publish_date, archived, on_spotify: on_spotify)
+    new(publish_date, archived, genre, on_spotify: on_spotify)
   end
 
   def self.save_music_album(albums)
@@ -59,7 +60,7 @@ class MusicAlbum < Item
     albums_data = JSON.parse(File.read('json/albums.json'))
     albums = []
     albums_data.each do |album|
-      albums << new(album['genre'], album['publish_date'], album['archived'], on_spotify: album['on_spotify'])
+      albums << new(album['publish_date'], album['archived'], album['genre'], on_spotify: album['on_spotify'])
     end
     albums
   end
