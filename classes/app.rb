@@ -2,6 +2,7 @@ require_relative './music'
 require_relative './genre'
 require 'terminal-table'
 require 'json'
+require_relative './movies'
 
 class App
   attr_accessor :movies, :albums, :genres, :sources
@@ -27,7 +28,7 @@ class App
     when 4
       create_new_music_data
     when 5
-      Movie.add_movie(@movies)
+      Movies.add_movie(@movies)
     else
       'Invalid option'
     end
