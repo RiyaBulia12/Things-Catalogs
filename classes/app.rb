@@ -38,13 +38,16 @@ class App
 
   def retrieve_genre_list
     @genres = Genre.list_all_genres
-    Genre.create_genre_choice if @genres.empty?
+    if @genres.empty?
+      Genre.create_genre_choice
+    else
+      Genre.enter_genre_details(@genres)
+    end
   end
 
   def create_new_music_data
     @albums = MusicAlbum.retrieve_music_albums
-    retrieve_genre_list
-    genre_name = Genre.enter_genre_details(@genres) if @genres.empty? == false
+    genre_name = retrieve_genre_list
 
     @albums << MusicAlbum.add_music_album(genre_name)
 
